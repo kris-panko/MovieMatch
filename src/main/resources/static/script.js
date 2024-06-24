@@ -88,11 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addToWatchList = function (movieId, title, posterPath, overview) {
+        const movieFromSearch = searchResultsData.find(movie => movie.id === movieId);
         if (watchList.some(movie => movie.id === movieId) || watchedList.some(movie => movie.id === movieId)) {
             alert('This movie is already in your watchlist or watched list.');
             return;
         }
-        const movie = {id: movieId, title, posterPath, overview, rating: 0};
+        const movie = {
+            id: movieId,
+            title,
+            posterPath,
+            overview,
+            rating: 0,
+            release_date: movieFromSearch ? movieFromSearch.release_date : ''
+        }; // Ensure rating and release_date are initialized
         watchList.push(movie);
         localStorage.setItem('watchList', JSON.stringify(watchList));
         alert('Movie added to watchlist.');
@@ -184,7 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
                 <h3>${movie.title}</h3>
-                <p>${movie.overview}</p>
+                <p><strong>Release Date:</strong> ${movie.release_date}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average}/10</p>    
                 <button onclick="showMovieDetails(${movie.id})">More Details</button>
                 <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '${movie.overview.replace(/'/g, "\\'")}')">👍</button>
                 <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'similar-movies-container')">👎</button>
@@ -219,7 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
                 <h3>${movie.title}</h3>
-                <p>${movie.overview}</p>
+                <p><strong>Release Date:</strong> ${movie.release_date}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average}/10</p>    
                 <button onclick="showMovieDetails(${movie.id})">More Details</button>
                 <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '${movie.overview.replace(/'/g, "\\'")}')">👍</button>
                 <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'same-actors-movies-container')">👎</button>
@@ -242,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="${movie.posterPath}" alt="${movie.title}">
                 <h3>${movie.title}</h3>
-                <p>${movie.overview}</p>
+                
                 <button onclick="removeFromWatchList(${movie.id})">Remove from Watchlist</button>
                 <button onclick="markAsWatched(${movie.id})">Watched</button>
                 <button onclick="showMovieDetails(${movie.id})">More Details</button>
@@ -260,10 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="${movie.posterPath}" alt="${movie.title}">
                 <h3>${movie.title}</h3>
-                <p>${movie.overview}</p>
+              
+                <p><strong>My Rating:</strong> ${movie.rating || 0}/10</p>
                 <button onclick="removeFromWatchedList(${movie.id})">Remove from Watched</button>
                 <div class="rating">
-                    ${[1, 2, 3, 4, 5].map(star => `
+                    ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(star => `
                         <span onclick="setRating(${movie.id}, ${star})" class="${movie.rating >= star ? 'gold' : 'gray'}">★</span>
                     `).join('')}
                 </div>
