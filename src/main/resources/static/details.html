@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch - Movie Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .movie-details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-details-container img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-details-container h1 {
+            margin: 20px 0 10px;
+            font-size: 48px; /* 3 times larger than the original */
+            text-align: center;
+        }
+
+        .movie-details-container p {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .movie-details-container button {
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .movie-details-container button:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">Movies</a>
+                <ul>
+                    <li><a href="recommendations.html">Recommendations</a></li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="movie-details-container">
+        <h1 id="movie-title">Movie Title</h1>
+        <img id="movie-poster" src="" alt="Movie Poster">
+        <p id="movie-description">Movie description will be here...</p>
+        <p><strong>Year:</strong> <span id="movie-year"></span></p>
+        <p><strong>Genre:</strong> <span id="movie-genre"></span></p>
+        <p><strong>Actors:</strong> <span id="movie-actors"></span></p>
+        <button onclick="goBack()">Back</button>
+    </div>
+</main>
+<script src="script.js"></script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</body>
+</html>

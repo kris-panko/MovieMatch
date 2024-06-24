@@ -1,0 +1,248 @@
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1d1f27;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    background-color: #282c34;
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    position: relative;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 24px; /* Increase the font size */
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    padding: 0;
+    list-style: none;
+    min-width: 160px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li {
+    display: block;
+    margin: 0;
+}
+
+nav ul li ul li a {
+    padding: 10px;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #e0e0e0;
+}
+
+h2.section-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 40px 0 20px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+#movie-title {
+    width: 60%;
+    padding: 15px;
+    font-size: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+    background-color: #2c2f36;
+    color: #e0e0e0;
+}
+
+#movie-title:focus {
+    border-color: #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+button {
+    background-color: #61dafb;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 12px 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #21a1f1;
+    transform: scale(1.05);
+}
+
+#clear-results-button {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#search-results, #recommendations-container, #similar-movies-container, #same-actors-movies-container, #watch-list-container, #watched-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust gap for better spacing */
+    justify-content: space-around; /* Use space-around to center items and add space around them */
+    padding: 0;
+}
+
+/* Movie Container Styling */
+.movie-container {
+    background-color: #2c2f36;
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    flex: 1 1 calc(33.333% - 40px); /* Adjust width for three items per row */
+    max-width: 300px; /* Ensure the containers don't stretch too much */
+    margin: 20px 0; /* Adjust margin for better spacing */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movie-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.movie-container img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-container:hover img {
+    transform: scale(1.1);
+}
+
+.movie-container h3 {
+    font-size: 22px;
+    margin: 15px 0;
+    color: #e0e0e0;
+}
+
+.movie-container p {
+    font-size: 16px;
+    color: #aaa;
+    margin: 10px 0;
+}
+
+.movie-container button {
+    background-color: #61dafb;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.movie-container button:hover {
+    background-color: #21a1f1;
+    transform: scale(1.05);
+}
+
+.movie-container .rating {
+    margin-top: 10px;
+}
+
+.movie-container .rating span {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.movie-container .rating span.gold {
+    color: gold;
+}
+
+.movie-container .rating span.gray {
+    color: gray;
+}
+
+/* Thumbs Button Styling */
+.thumb-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    transition: transform 0.3s ease;
+    margin: 5px;
+}
+
+.thumb-button.thumb-up {
+    color: #61dafb;
+}
+
+.thumb-button.thumb-up:hover {
+    color: #21a1f1;
+    transform: scale(1.2);
+}
+
+.thumb-button.thumb-down {
+    color: #ff6b6b;
+}
+
+.thumb-button.thumb-down:hover {
+    color: #ff4b4b;
+    transform: scale(1.2);
+}

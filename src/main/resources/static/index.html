@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">Movies</a>
+                <ul>
+                    <li><a href="recommendations.html">Recommendations</a></li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1 style="color: white; text-shadow: 2px 2px 4px #aaa;">Search for Movies</h1>
+    <form id="search-form">
+        <input type="text" id="movie-title" placeholder="Enter movie title" pattern="^[A-Za-z0-9 ]+$">
+        <button type="submit">Search</button>
+    </form>
+    <button id="clear-results-button">Clear Results</button>
+    <div id="search-results">
+        <!-- Search results will be displayed here -->
+    </div>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
