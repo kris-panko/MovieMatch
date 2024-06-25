@@ -58,6 +58,74 @@
             background-color: #555;
             transform: scale(1.05);
         }
+
+        .review {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        #additional-details {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        #additional-details h2 {
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        #additional-details table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #000;
+        }
+
+        #additional-details th, #additional-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #additional-details th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -83,6 +151,26 @@
         <p><strong>Year:</strong> <span id="movie-year"></span></p>
         <p><strong>Genre:</strong> <span id="movie-genre"></span></p>
         <p><strong>Actors:</strong> <span id="movie-actors"></span></p>
+
+        <div id="additional-details">
+            <h2>Additional Details</h2>
+            <table>
+                <tr>
+                    <th>Director</th>
+                    <td id="movie-director">Director Name</td>
+                </tr>
+                <tr>
+                    <th>Producer</th>
+                    <td id="movie-producer">Producer Name</td>
+                </tr>
+                <tr>
+                    <th>Budget</th>
+                    <td id="movie-budget">Budget Amount</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="movie-reviews"></div>
         <button onclick="goBack()">Back</button>
     </div>
 </main>

@@ -238,8 +238,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.showMovieDetails = function (movieId) {
+    window.showMovieDetails = async function (movieId) {
         localStorage.setItem('selectedMovieId', movieId);
+        const reviews = await fetchReviews(movieId);
+        localStorage.setItem('selectedMovieReviews', JSON.stringify(reviews));
         window.location.href = 'details.html';
     };
 
@@ -252,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="${movie.posterPath}" alt="${movie.title}">
                 <h3>${movie.title}</h3>
-                
                 <button onclick="removeFromWatchList(${movie.id})">Remove from Watchlist</button>
                 <button onclick="markAsWatched(${movie.id})">Watched</button>
                 <button onclick="showMovieDetails(${movie.id})">More Details</button>
@@ -270,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
             movieElement.innerHTML = `
                 <img src="${movie.posterPath}" alt="${movie.title}">
                 <h3>${movie.title}</h3>
-              
                 <p><strong>My Rating:</strong> ${movie.rating || 0}/10</p>
                 <button onclick="removeFromWatchedList(${movie.id})">Remove from Watched</button>
                 <div class="rating">
@@ -284,26 +284,99 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Remove review-related form from the watched list page
+    function displayMovieReviews(movieId, reviews) {
+        const reviewsContainer = document.getElementById('movie-reviews');
+        if (reviewsContainer) {
+            reviewsContainer.innerHTML = '<h3>Reviews:</h3>';
+            reviews.forEach((review, index) => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review';
+                reviewElement.innerHTML = `<p><strong>Review ${index + 1}:</strong> ${review}</p>`;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+    }
+
+    window.addReview = function (event, movieId) {
+        event.preventDefault();
+        const reviewText = document.getElementById(`review-${movieId}`).value;
+        if (!reviewText.trim()) {
+            alert('Please enter a review before submitting.');
+            return;
+        }
+        document.getElementById(`review-${movieId}`).value = ''; // Clear the textarea
+
+        const reviews = JSON.parse(localStorage.getItem('selectedMovieReviews')) || [];
+        reviews.unshift(reviewText); // Add new review to the beginning
+        localStorage.setItem('selectedMovieReviews', JSON.stringify(reviews));
+        displayMovieReviews(movieId, reviews);
+
+        alert('Review added!');
+    };
+
     // Display initial search results, watchlist, and watched list
     displaySearchResults(searchResultsData);
     displayWatchList();
     displayWatchedList();
 
-    // Fetch and display movie details
+    async function fetchReviews(movieId) {
+        try {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${apiKey}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data.results.map(review => review.content);
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            return [];
+        }
+    }
+
+    async function fetchMovieDetails(movieId) {
+        try {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&append_to_response=credits`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const movie = await response.json();
+            return movie;
+        } catch (error) {
+            console.error('Error fetching movie details:', error);
+            return null;
+        }
+    }
+
     if (window.location.pathname.includes('details.html')) {
         const movieId = localStorage.getItem('selectedMovieId');
         if (movieId) {
-            fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&append_to_response=credits`)
-                .then(response => response.json())
-                .then(movie => {
+            fetchMovieDetails(movieId).then(movie => {
+                if (movie) {
                     document.getElementById('movie-title').textContent = movie.title;
                     document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
                     document.getElementById('movie-description').textContent = movie.overview;
                     document.getElementById('movie-year').textContent = movie.release_date.split('-')[0];
                     document.getElementById('movie-genre').textContent = movie.genres.map(genre => genre.name).join(', ');
                     document.getElementById('movie-actors').textContent = movie.credits.cast.map(actor => actor.name).join(', ');
-                })
-                .catch(error => console.error('Error fetching movie details:', error));
+                    document.getElementById('movie-director').textContent = movie.credits.crew.find(crew => crew.job === 'Director')?.name || 'N/A';
+                    document.getElementById('movie-producer').textContent = movie.credits.crew.find(crew => crew.job === 'Producer')?.name || 'N/A';
+                    document.getElementById('movie-budget').textContent = movie.budget ? `$${movie.budget.toLocaleString()}` : 'N/A';
+
+                    const reviews = JSON.parse(localStorage.getItem('selectedMovieReviews')) || [];
+                    displayMovieReviews(movieId, reviews);
+
+                    const reviewForm = document.createElement('form');
+                    reviewForm.onsubmit = function (event) {
+                        addReview(event, movieId);
+                    };
+                    reviewForm.innerHTML = `
+                        <textarea id="review-${movieId}" placeholder="Add your review"></textarea>
+                        <button type="submit">Submit Review</button>
+                    `;
+                    document.querySelector('.movie-details-container').appendChild(reviewForm);
+                }
+            }).catch(error => console.error('Error fetching movie details:', error));
         }
     }
 });
