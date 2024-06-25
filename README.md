@@ -67,16 +67,14 @@ MovieMatch is a web application that allows users to search for movies, get reco
 
 ## Project Structure
 
-moviematch/
-├── index.html
-├── recommendations.html
-├── watchlist.html
-├── details.html
-├── style.css
-└── script.js
+moviematch/<b>
+├── index.html<b>
+├── recommendations.html<b>
+├── watchlist.html<b>
+├── details.html<b>
+├── style.css<b>
+└── script.js<b>
 
-markdown
-Copy code
 
 ## Deployment
 
