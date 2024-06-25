@@ -6,11 +6,11 @@ MovieMatch is a web application that allows users to search for movies, get reco
 
 ## Features
 
-- **Search for Movies**: Users can search for movies by title.
-- **Movie Recommendations**: Provides movie recommendations based on the selected movie.
-- **Watchlist Management**: Users can add movies to their watchlist and mark them as watched.
-- **Additional Details**: Displays additional movie details like director, producer, and budget.
-- **Review System**: Users can add reviews to movies.
+- **Search for Movies**: Users can search for movies by title. Users can see more details and thumbs up or thumbs down a movie to add to watchlist or remove from search. 
+- **Movie Recommendations**: Provides movie recommendations based on the selected movie, with sub-categories for similar movies and movies with similar actors. 
+- **Watchlist Management**: Users can add movies to their watchlist and mark them as watched. Users can then rate watched movies. Users can also remove movies from Watched and Watchlist. 
+- **Details**: Displays movie details like year, rating, actors, as well as additional movie details like director, producer, and budget.
+- **Review System**: Users can read and add reviews to movies.
 
 ## Technical Specifications
 
