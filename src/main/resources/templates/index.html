@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li>
+                <a href="#">Movies</a>
+                <ul>
+                    <li><a th:href="@{/recommendations}">Recommendations</a></li>
+                    <li><a th:href="@{/watchlist}">Watchlist</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1 style="color: white; text-shadow: 2px 2px 4px #aaa;">Search for Movies</h1>
+    <form id="search-form">
+        <input type="text" id="movie-title" placeholder="Enter movie title" pattern="^[A-Za-z0-9 ]+$">
+        <button type="submit">Search</button>
+    </form>
+    <button id="clear-results-button">Clear Results</button>
+    <div id="search-results">
+        <!-- Search results  -->
+    </div>
+</main>
+<script th:src="@{/static/script.js}"></script>
+</body>
+</html>
