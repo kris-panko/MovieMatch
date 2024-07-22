@@ -160,6 +160,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements
 The Movie Database (TMDB) API for movie data.
 Spring Boot for providing a powerful and easy-to-use framework.
-All the instructors and peers who provided guidance and support throughout the project.
+My mama. 
 Author
 Kris Panko

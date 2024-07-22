@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Entity representing a user.
+ */
 @Setter
 @Getter
 @Entity

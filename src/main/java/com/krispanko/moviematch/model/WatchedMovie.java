@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entity representing a watched movie.
+ */
 @Setter
 @Getter
 @NoArgsConstructor
@@ -21,6 +24,12 @@ public class WatchedMovie {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /**
+     * Constructs a WatchedMovie with the specified movieId and user.
+     *
+     * @param movieId the ID of the movie
+     * @param user the user who watched the movie
+     */
     public WatchedMovie(Long movieId, User user) {
         this.movieId = movieId;
         this.user = user;

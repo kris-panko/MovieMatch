@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Entity representing a watchlist.
+ */
 @Setter
 @Getter
 @Entity
@@ -20,5 +23,4 @@ public class Watchlist {
 
     @ElementCollection
     private List<Long> movieIds;
-
 }
