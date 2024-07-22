@@ -244,3 +244,105 @@ button:hover {
     color: #ff4b4b;
     transform: scale(1.2);
 }
+
+/* Movie Details Container Styling */
+.movie-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+
+.movie-details-container img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.movie-details-container h1 {
+    margin: 20px 0 10px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.movie-details-container p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.review {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 100%;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #61dafb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #21a1f1;
+    transform: scale(1.05);
+}
+
+#additional-details {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#additional-details h2 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+#additional-details table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000;
+}
+
+#additional-details th, #additional-details td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#additional-details th {
+    background-color: #f2f2f2;
+}

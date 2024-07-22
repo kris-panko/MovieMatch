@@ -1,6 +1,7 @@
 const apiKey = '83aa758b074661e714f4e1843a462200';
 
 document.addEventListener('DOMContentLoaded', () => {
+
     const searchForm = document.getElementById('search-form');
     const searchResults = document.getElementById('search-results');
     const recommendationsContainer = document.getElementById('recommendations-container');
@@ -47,21 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function displaySearchResults(movies) {
         if (!searchResults) return;
         searchResults.innerHTML = '';
-        movies.forEach(movie => {
+        for (const movie of movies) {
             const movieElement = document.createElement('div');
             movieElement.className = 'movie-container';
             movieElement.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
-            <h3>${movie.title}</h3>
-            <p><strong>Release Date:</strong> ${movie.release_date}</p>
-            <p><strong>Rating:</strong> ${movie.vote_average}/10</p>
-            <button onclick="showMovieDetails(${movie.id})">More Details</button>
-            <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '')">👍</button>
-            <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'search-results')">👎</button>
-            <button onclick="redirectToRecommendations(${movie.id})">Get Recommendations</button>
-        `;
+                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
+                <h3>${movie.title}</h3>
+                <p><strong>Release Date:</strong> ${movie.release_date}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average}/10</p>
+                <button onclick="showMovieDetails(${movie.id})">More Details</button>
+                <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '')">👍</button>
+                <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'search-results')">👎</button>
+                <button onclick="redirectToRecommendations(${movie.id})">Get Recommendations</button>
+            `;
             searchResults.appendChild(movieElement);
-        });
+        }
     }
 
     window.thumbUp = function (movieId, title, posterPath, overview) {
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.redirectToRecommendations = function (movieId) {
         localStorage.setItem('selectedMovieId', movieId);
-        window.location.href = 'recommendations.html';
+        window.location.href = '/recommendations';
     };
 
     window.addToWatchList = function (movieId, title, posterPath, overview) {
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overview,
             rating: 0,
             release_date: movieFromSearch ? movieFromSearch.release_date : ''
-        }; // Ensure rating and release_date are initialized
+        };
         watchList.push(movie);
         localStorage.setItem('watchList', JSON.stringify(watchList));
         alert('Movie added to watchlist.');
@@ -161,15 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const movieElement = document.createElement('div');
             movieElement.className = 'movie-container';
             movieElement.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
-            <h3>${movie.title}</h3>
-            <p><strong>Release Date:</strong> ${movie.release_date}</p>
-            <p><strong>Rating:</strong> ${movie.vote_average}/10</p>
-            <button onclick="showMovieDetails(${movie.id})">More Details</button>
-            <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '')">👍</button>
-            <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'recommendations-container')">👎</button>
-            <button onclick="redirectToRecommendations(${movie.id})">Get Recommendations</button>
-        `;
+                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.id}">
+                <h3>${movie.title}</h3>
+                <p><strong>Release Date:</strong> ${movie.release_date}</p>
+                <p><strong>Rating:</strong> ${movie.vote_average}/10</p>
+                <button onclick="showMovieDetails(${movie.id})">More Details</button>
+                <button class="thumb-button thumb-up" onclick="thumbUp(${movie.id}, '${movie.title.replace(/'/g, "\\'")}', 'https://image.tmdb.org/t/p/w200${movie.poster_path}', '')">👍</button>
+                <button class="thumb-button thumb-down" onclick="thumbDown(${movie.id}, 'recommendations-container')">👎</button>
+                <button onclick="redirectToRecommendations(${movie.id})">Get Recommendations</button>
+            `;
             recommendationsContainer.appendChild(movieElement);
         });
     }
@@ -242,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('selectedMovieId', movieId);
         const reviews = await fetchReviews(movieId);
         localStorage.setItem('selectedMovieReviews', JSON.stringify(reviews));
-        window.location.href = 'details.html';
+        window.location.href = '/details';
     };
 
     function displayWatchList() {
@@ -284,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Remove review-related form from the watched list page
     function displayMovieReviews(movieId, reviews) {
         const reviewsContainer = document.getElementById('movie-reviews');
         if (reviewsContainer) {
@@ -305,17 +305,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please enter a review before submitting.');
             return;
         }
-        document.getElementById(`review-${movieId}`).value = ''; // Clear the textarea
+        document.getElementById(`review-${movieId}`).value = '';
 
         const reviews = JSON.parse(localStorage.getItem('selectedMovieReviews')) || [];
-        reviews.unshift(reviewText); // Add new review to the beginning
+        reviews.unshift(reviewText);
         localStorage.setItem('selectedMovieReviews', JSON.stringify(reviews));
         displayMovieReviews(movieId, reviews);
 
         alert('Review added!');
     };
 
-    // Display initial search results, watchlist, and watched list
     displaySearchResults(searchResultsData);
     displayWatchList();
     displayWatchedList();
@@ -341,14 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const movie = await response.json();
-            return movie;
+            displayMovieDetails(movie);
         } catch (error) {
             console.error('Error fetching movie details:', error);
-            return null;
         }
     }
-
-    if (window.location.pathname.includes('details.html')) {
+    if (window.location.pathname.includes('/details')) {
         const movieId = localStorage.getItem('selectedMovieId');
         if (movieId) {
             fetchMovieDetails(movieId).then(movie => {
